@@ -9,7 +9,11 @@
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
             <!--your rest service package here-->
-            <param-value>com.sian.javaprojecttemplates.rest.vue.rest</param-value>
+            <param-value>com.sian.javaprojecttemplates.restvue.rest</param-value>
+        </init-param>
+        <init-param>
+            <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+            <param-value>com.sian.javaprojecttemplates.restvue.rest.filter.CustomLoggingFilter</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
@@ -23,6 +27,15 @@
         <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
 
+
+    <!--filter>
+        <filter-name>RequestLoggingFilter</filter-name>
+        <filter-class>com.sian.javaprojecttemplates.restvue.rest.filter.RequestLoggingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RequestLoggingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping-->
 
 
 <!--    Security-->

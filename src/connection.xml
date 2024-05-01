@@ -6,26 +6,29 @@
 <configuration>
 
     <typeAliases>
-        <package name="model.entity"/>
+        <package name="com.sian.javaprojecttemplates.restvue.model.entity"/>
     </typeAliases>
 
     <environments default="X">
         <environment id="X">
-            <transactionManager type="JDBC"/>
+            <transactionManager type="JDBC" />
             <!--<transactionManager type="MANAGED"/>-->
             <!-- Using connection pool -->
-            <dataSource type="POOLED">
-            <property name="driver" value="org.postgresql.Driver"/>
-            <property name="url" value="jdbc:postgresql://localhost:5432/postgres"/>
-            <property name="username" value="alvin"/>
-            <property name="password" value="myjava123"/>
-        </dataSource>
+            <!--dataSource type="POOLED">
+                <property name="driver" value="org.postgresql.Driver"/>
+                <property name="url" value="jdbc:postgresql://localhost:5432/postgres"/>
+                <property name="username" value="alvin"/>
+                <property name="password" value="myjava123"/>
+            </dataSource-->
+            
+            <dataSource type="com.sian.javaprojecttemplates.restvue.common.JDBC">
+            </dataSource>
+
 
         </environment>
     </environments>
 
     <mappers>
-<!--        <mapper resource="model/entity/person.xml"/>-->
-<!--        <mapper resource="model/entity/car.xml"/>-->
+        <mapper resource="com/sian/javaprojecttemplates/restvue/model/entity/person.xml"/>
     </mappers>
 </configuration>

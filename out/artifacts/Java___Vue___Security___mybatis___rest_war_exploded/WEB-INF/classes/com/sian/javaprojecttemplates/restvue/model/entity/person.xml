@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PersonMapper">
+    <resultMap id="result" type="Person">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="username" column="username"/>
+        <result property="family" column="family"/>
+    </resultMap>
+
+
+    <select id="findAll" resultMap="result" statementType="PREPARED" useCache="false">
+              SELECT * FROM test.person
+    </select>
+
+    <insert id="insert" parameterType="Person" statementType="PREPARED" flushCache="false">
+        <selectKey resultType="long" keyProperty="id" order="BEFORE">
+            SELECT nextval('test.common_seq')
+        </selectKey>
+        INSERT INTO test.person (
+        "id",
+        "name",
+        "family"
+        )
+        VALUES (
+        #{id},
+        #{name},
+        #{family}
+        )
+    </insert>
+
+    <update id="update" parameterType="Person" statementType="PREPARED" flushCache="false">
+
+              UPDATE test.person SET
+                "name"=#{name},
+                "family"=#{family}
+                WHERE "id" = #{id}
+
+    </update>
+
+    <delete id="delete" parameterType="Person" statementType="PREPARED" flushCache="false">
+
+              DELETE from test.person WHERE "id" = #{id}
+
+    </delete>
+</mapper>

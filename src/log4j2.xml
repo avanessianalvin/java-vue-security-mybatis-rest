@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+        </Console>
+
+        <JDBC name="Database" tableName="test.log">
+            <ConnectionFactory class="com.sian.javaprojecttemplates.restvue.common.JDBC" method="getConnection" />
+            <Column name="timestamp" isEventTimestamp="true"/>
+            <Column name="level" pattern="%p" isUnicode="false"/>
+            <Column name="logger" pattern="%c{1}" isUnicode="false"/>
+            <Column name="message" pattern="%m" isUnicode="false"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+        </JDBC>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="Database" />
+        </Root>
+    </Loggers>
+</Configuration>
