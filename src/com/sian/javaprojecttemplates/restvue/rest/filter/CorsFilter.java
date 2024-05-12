@@ -21,12 +21,16 @@ public class CorsFilter implements Filter {
         //res.setHeader("Access-Control-Allow-Headers", "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
 
 
+
+
         HttpServletRequest req = (HttpServletRequest) request;
 
-        HttpSession session = req.getSession(false);
+/*       HttpSession session = req.getSession(false);
         if (session == null) {
             session = req.getSession(true);
         }
+*/
+
 
 
 

@@ -19,7 +19,8 @@
            userRoleTable="test.user"
            roleNameCol="rolename"/-->
 
-    <Realm className="org.apache.catalina.realm.JDBCRealm"
+    <Realm name="basic_realm"
+            className="org.apache.catalina.realm.JDBCRealm"
            connectionName="db_user"
            connectionPassword="myjava123"
            connectionURL="jdbc:postgresql://localhost:5432/postgres"

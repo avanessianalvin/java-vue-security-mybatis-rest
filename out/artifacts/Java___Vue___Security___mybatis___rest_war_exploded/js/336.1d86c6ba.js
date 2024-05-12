@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkpanel"]=self["webpackChunkpanel"]||[]).push([[336],{2336:function(n,e,u){u.r(e),u.d(e,{default:function(){return f}});var r=u(6768);function a(n,e){return(0,r.uX)(),(0,r.CE)("h1",null,"Main Page - Home")}var t=u(1241);const c={},l=(0,t.A)(c,[["render",a]]);var f=l}}]);
+//# sourceMappingURL=336.1d86c6ba.js.map

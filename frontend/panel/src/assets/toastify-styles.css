@@ -1,0 +1,12 @@
+/* src/assets/toastify-styles.css.css*/
+.toastify-success {
+    background: green;
+}
+
+.toastify-error {
+    background: red;
+}
+
+.toastify-warning {
+    background: orange;
+}

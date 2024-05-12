@@ -3,6 +3,7 @@
     <v-main>
       <v-progress-linear color="cyan-darken-2" indeterminate v-if="loading"></v-progress-linear>
       <router-view></router-view>
+
     </v-main>
   </v-app>
 
@@ -21,8 +22,9 @@ export default {
   computed:{
     ...mapGetters(["isLoggedIn", "loading"]),
   },
-  beforeMount() {
-    //this.$store.dispatch('isLoggedInDashboard')
-  },
+
 }
 </script>
+<style>
+
+</style>

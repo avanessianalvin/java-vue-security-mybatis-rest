@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import axios from "axios";
+//import axios from "axios";
 
 const routes = [
     {
@@ -60,7 +60,8 @@ router.beforeEach((to, from, next) => {
 
 async function ch(next){
         // Check if the user is logged in (replace with your own authentication check)
-        const isLoggedIn = await checkUserLoggedIn();
+        //const isLoggedIn = await checkUserLoggedIn();
+        const isLoggedIn = true;
         if (!isLoggedIn) {
             // User is not logged in, redirect to the login page
             next('/login');
@@ -69,6 +70,7 @@ async function ch(next){
             next();
         }
 }
+/*
 
 async function checkUserLoggedIn() {
     return axios
@@ -91,5 +93,6 @@ async function checkUserLoggedIn() {
             return false;
         });
 }
+*/
 
 export default router;

@@ -1,15 +1,19 @@
 <template>
     <div class="login">
         <v-container>
-            <v-card max-width="400" class="mx-auto">
+            <v-card class="mx-auto" max-width="400">
+
                 <v-card-title>Login</v-card-title>
-                <v-card-text>
-                    <v-text-field v-model="username" label="Username"></v-text-field>
-                    <v-text-field v-model="password" label="Password" type="password"></v-text-field>
-                </v-card-text>
-                <v-card-actions>
-                    <v-btn color="primary" @click="login">Login</v-btn>
-                </v-card-actions>
+                <v-form @submit.prevent="login" ref="form">
+                    <v-card-text>
+                        <v-text-field :rules="requiredRule" label="Username" v-model="payload.username"></v-text-field>
+                        <v-text-field :rules="requiredRule" label="Password" type="password" v-model="payload.password"></v-text-field>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-btn color="primary" type="submit">Login</v-btn>
+                    </v-card-actions>
+                </v-form>
+                <v-alert v-if="errorMessage !== ''" type="error" variant="" :text="errorMessage"/>
             </v-card>
         </v-container>
     </div>
@@ -20,21 +24,33 @@
         name: "LoginPage",
         data() {
             return {
-                username: '',
-                password: ''
+                payload: {
+                    username: '',
+                    password: ''
+                },
+                requiredRule: [
+                    v => !!v || 'required'
+                ],
+                errorMessage:''
             };
         },
         methods: {
+
+            async validate() {
+                const {valid} = await this.$refs.form.validate()
+                return valid
+            },
+
             login() {
-                const payload = {
-                    username : this.username,
-                    password: this.password
-                }
-                this.$store.dispatch('loginToDashboard',payload).then((res)=>{
-                    if (res){
-                        this.$router.push({name:'dashboard'})
-                    }else {
-                        alert("user/pass uas not correct!")
+                this.validate().then((valid) => {
+                    if (valid) {
+                        this.$store.dispatch('loginToDashboard', this.payload).then((res) => {
+                            if (res) {
+                                this.$router.push({name: 'dashboard'})
+                            } else {
+                                this.errorMessage = "user/pass is not correct!"
+                            }
+                        })
                     }
                 })
             }

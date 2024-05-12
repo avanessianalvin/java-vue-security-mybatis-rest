@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkpanel"]=self["webpackChunkpanel"]||[]).push([[62],{9062:function(a,e,n){n.r(e),n.d(e,{default:function(){return l}});var t=n(6768);const s={class:"dashboard"},r=(0,t.Lk)("h1",null,"Dashboard",-1),p=[r];function u(a,e,n,r,u,c){return(0,t.uX)(),(0,t.CE)("div",s,p)}var c=n(782),d={name:"DashboardPage",computed:{...(0,c.L8)(["appName"])},methods:{getAppName(){this.$store.dispatch("getAppName")}}},o=n(1241);const h=(0,o.A)(d,[["render",u]]);var l=h}}]);
+//# sourceMappingURL=62.888b9400.js.map

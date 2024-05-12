@@ -2,14 +2,55 @@ package com.sian.javaprojecttemplates.restvue.rest;
 
 import com.sian.javaprojecttemplates.restvue.model.entity.Person;
 import com.sian.javaprojecttemplates.restvue.model.service.PersonService;
+import com.sian.javaprojecttemplates.restvue.util.Validator;
+import org.apache.catalina.authenticator.BasicAuthenticator;
+import org.apache.catalina.connector.Request;
 
+
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Base64;
 import java.util.List;
 
 @Path("/person")
 public class PersonApi {
+
+    @Context
+    HttpServletRequest req;
+
+
+    @POST
+    @Path("/login.auth")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response loginAuth(@HeaderParam("Authorization") String header) {
+        if (header == null) {
+            System.out.println("NO HEADDER");
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+
+        String authorization = header.substring("Basic ".length());
+        byte[] decodedPass = Base64.getDecoder().decode(authorization);
+        String userpass = new String(decodedPass);
+        String[] token = userpass.split(":");
+
+        try {
+            //req.login(token[0], token[1]);
+            BasicAuthenticator basicAuthenticator = new BasicAuthenticator();
+            System.out.println(req.getClass().getName());
+            basicAuthenticator.login(token[0],token[1], (Request) req);
+
+
+            return Response.ok().build();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+    }
+
 
     @Path("findAll")
     @GET
@@ -43,9 +84,14 @@ public class PersonApi {
     @Produces(MediaType.APPLICATION_JSON)
     public Response addPerson(Person person){
 
+        String errorsMessage = Validator.getErrorsMessage(person);
+        if (errorsMessage.length()>0){
+            return Response.status(Response.Status.BAD_REQUEST).entity(errorsMessage).build();
+        }
+
         try {
             PersonService.getInstance().addPerson(person);
-            return Response.ok().build();
+            return Response.ok().header("msg",MessageStore.PersonAdded).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
@@ -57,10 +103,14 @@ public class PersonApi {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updatePerson(Person person){
+        String errorsMessage = Validator.getErrorsMessage(person);
+        if (errorsMessage.length()>0){
+            return Response.status(Response.Status.BAD_REQUEST).entity(errorsMessage).build();
+        }
 
         try {
             PersonService.getInstance().updatePerson(person);
-            return Response.ok().build();
+            return Response.ok().header("msg",MessageStore.PersonUpdated).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
@@ -74,12 +124,10 @@ public class PersonApi {
 
         try {
             PersonService.getInstance().removePerson(id);
-            return Response.ok().build();
+            return Response.ok().header("msg",MessageStore.PersonRemoved).build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
         }
     }
-
-
 }

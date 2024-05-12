@@ -1,15 +1,14 @@
+<tologinpage/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Log in</title>
 </head>
 <body>
-<h1>login</h1>
-<form action="/rest/common/login.do" method="post" enctype="application/x-www-form-urlencoded">
-    <input type="text" name="username" placeholder="username">
-    <input type="password" name="password" placeholder="password">
-    <input type="submit">
-</form>
+<a href="/login">login</a>
 </body>
+<script>
+    window.location.href=window.location.origin + "/login"
+</script>
 </html>

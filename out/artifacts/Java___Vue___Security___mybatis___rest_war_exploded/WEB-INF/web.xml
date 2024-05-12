@@ -54,13 +54,18 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping-->
 
+    <error-page>
+        <error-code>404</error-code>
+        <location>/</location>
+    </error-page>
 
 <!--    Security-->
 
     <login-config>
         <auth-method>FORM</auth-method>
+
         <form-login-config>
-            <form-login-page>/login.html</form-login-page>
+            <form-login-page>/login</form-login-page>
             <form-error-page>/error.html</form-error-page>
         </form-login-config>
     </login-config>
